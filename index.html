@@ -1,0 +1,585 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10182c">
+  <meta name="description" content="Adidi2071 Mods: discover The New Levels and Mario and the Mysterious Portal, two New Super Mario Bros. Wii fan projects.">
+  <title>Adidi2071 Mods</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+    :root {
+      --bg: #10182c;
+      --panel: rgba(255,255,255,.065);
+      --text: #f5f7ff;
+      --muted: #b6c1d9;
+      --orange: #ffad45;
+      --green: #78e5b0;
+      --cyan: #83dcff;
+      --purple: #a78bfa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 8% 5%, #263d69 0, transparent 38%),
+        radial-gradient(ellipse at 95% 45%, #33245d 0, transparent 35%),
+        var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .navbar {
+      width: min(1120px, 92%);
+      margin: auto;
+      padding: 22px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: -.5px;
+    }
+
+    .brand span {
+      color: var(--orange);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-weight: 800;
+      transition: color .2s;
+    }
+
+    .nav-link:hover {
+      color: white;
+    }
+
+    .lang-button {
+      border: 1px solid #ffffff30;
+      border-radius: 12px;
+      padding: 9px 13px;
+      background: var(--panel);
+      color: white;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .hero {
+      width: min(950px, 92%);
+      margin: auto;
+      padding: 95px 0 70px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #ffffff20;
+      background: #ffffff09;
+      border-radius: 50px;
+      padding: 8px 15px;
+      color: #dce6ff;
+      font-size: .85rem;
+      font-weight: 800;
+      margin-bottom: 25px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #72e6a0;
+      box-shadow: 0 0 12px #72e6a0;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 8vw, 5.6rem);
+      line-height: 1.05;
+      font-weight: 900;
+      letter-spacing: -3px;
+    }
+
+    .gradient {
+      background: linear-gradient(100deg, #ffb84d, #ff7d66, #bd9bff);
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 25px auto 30px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .main-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(100deg, #ffad45, #ff805b);
+      color: #20172a;
+      font-weight: 900;
+      padding: 14px 24px;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px #ff923b30;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .main-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 34px #ff923b45;
+    }
+
+    .projects {
+      width: min(1120px, 92%);
+      margin: auto;
+      padding: 30px 0 90px;
+      scroll-margin-top: 25px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.8rem, 5vw, 2.7rem);
+      font-weight: 900;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 25px;
+    }
+
+    .mod-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #ffffff20;
+      border-radius: 25px;
+      background: var(--panel);
+      backdrop-filter: blur(15px);
+      transition: transform .25s, border-color .25s;
+    }
+
+    .mod-card:hover {
+      transform: translateY(-7px);
+      border-color: #ffffff65;
+    }
+
+    .art {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .art-tnl {
+      background:
+        radial-gradient(ellipse at 50% 100%, #ffcf65 0, transparent 42%),
+        linear-gradient(140deg, #276a55, #54b8a1 48%, #b2e8d3);
+    }
+
+    .art-matmp {
+      background:
+        radial-gradient(ellipse at 50% 55%, #30c7ff66, transparent 30%),
+        radial-gradient(ellipse at 50% 100%, #a26aff50, transparent 55%),
+        linear-gradient(140deg, #101d4c, #32245f 55%, #13182f);
+    }
+
+    .art-tnl::before,
+    .art-tnl::after {
+      content: "";
+      position: absolute;
+      bottom: -80px;
+      width: 260px;
+      height: 150px;
+      background: #267a53;
+      border-radius: 50%;
+    }
+
+    .art-tnl::before {
+      left: -50px;
+    }
+
+    .art-tnl::after {
+      right: -50px;
+      background: #388b59;
+    }
+
+    .art-matmp::before {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 150px;
+      border: 7px solid #6fe9ff;
+      border-radius: 48% 48% 40% 40%;
+      box-shadow: 0 0 16px #4de5ff, inset 0 0 18px #4de5ff, 0 0 48px #765cff;
+      transform: perspective(150px) rotateX(-4deg);
+    }
+
+    .art-matmp::after {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 120px;
+      background: radial-gradient(ellipse, #d6ffff, #4d8dff 40%, #a348ff99 70%, transparent);
+      filter: blur(9px);
+    }
+
+    .art-icon {
+      position: relative;
+      z-index: 2;
+      font-size: 5.5rem;
+      filter: drop-shadow(0 10px 12px #0004);
+      transition: transform .3s;
+    }
+
+    .mod-card:hover .art-icon {
+      transform: scale(1.1) rotate(-4deg);
+    }
+
+    .art-matmp .art-icon {
+      font-size: 3rem;
+    }
+
+    .card-content {
+      padding: 26px;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 8px;
+      padding: 5px 10px;
+      background: #ffffff12;
+      border: 1px solid #ffffff20;
+      font-size: .75rem;
+      font-weight: 900;
+      color: #dce6ff;
+      margin-bottom: 13px;
+    }
+
+    .card-content h3 {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      line-height: 1.25;
+      font-weight: 900;
+    }
+
+    .card-content p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin: 12px 0 24px;
+      flex: 1;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 900;
+      transition: gap .2s;
+    }
+
+    .tnl .card-link {
+      color: var(--green);
+    }
+
+    .matmp .card-link {
+      color: var(--cyan);
+    }
+
+    .card-link:hover {
+      gap: 14px;
+    }
+
+    .about {
+      width: min(900px, 92%);
+      margin: 0 auto 85px;
+      padding: 35px;
+      border: 1px solid #ffffff18;
+      border-radius: 24px;
+      background: #ffffff06;
+      text-align: center;
+      scroll-margin-top: 25px;
+    }
+
+    .about h2 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .about p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    footer {
+      border-top: 1px solid #ffffff15;
+      padding: 28px 4%;
+      text-align: center;
+      color: #9daac5;
+      font-size: .9rem;
+    }
+
+    footer strong {
+      color: var(--text);
+    }
+
+    .footer-small {
+      margin-top: 6px;
+      font-size: .8rem;
+    }
+
+    @media (max-width: 720px) {
+      .navbar {
+        flex-wrap: wrap;
+      }
+
+      .nav-right {
+        gap: 13px;
+      }
+
+      .nav-link {
+        display: none;
+      }
+
+      .hero {
+        padding: 70px 0 50px;
+      }
+
+      h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .art {
+        height: 195px;
+      }
+
+      .about {
+        padding: 25px 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <a class="brand" href="/" aria-label="Adidi2071 Mods">
+      ADIDI2071 <span>MODS.</span>
+    </a>
+
+    <nav class="nav-right" aria-label="Navigation">
+      <a class="nav-link" href="#projects"
+         data-fr="Mes mods" data-en="My mods">Mes mods</a>
+      <a class="nav-link" href="#about"
+         data-fr="À propos" data-en="About">À propos</a>
+      <button class="lang-button" id="langToggle" type="button"
+              aria-label="Switch to English">EN 🌐</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">
+        <span class="status-dot"></span>
+        <span data-fr="Projets de mods • New Super Mario Bros. Wii"
+              data-en="Mod projects • New Super Mario Bros. Wii">
+          Projets de mods • New Super Mario Bros. Wii
+        </span>
+      </div>
+
+      <h1>
+        <span data-fr="Deux mods." data-en="Two mods.">Deux mods.</span><br>
+        <span class="gradient"
+              data-fr="Deux aventures."
+              data-en="Two adventures.">Deux aventures.</span>
+      </h1>
+
+      <p data-fr="Bienvenue dans mon univers ! Découvre mes projets de mods New Super Mario Bros. Wii, chacun avec son identité, ses idées et ses surprises."
+         data-en="Welcome to my universe! Discover my New Super Mario Bros. Wii mod projects, each with its own identity, ideas and surprises.">
+        Bienvenue dans mon univers ! Découvre mes projets de mods
+        New Super Mario Bros. Wii, chacun avec son identité,
+        ses idées et ses surprises.
+      </p>
+
+      <a class="main-button" href="#projects">
+        <span data-fr="Découvrir les mods"
+              data-en="Explore the mods">Découvrir les mods</span>
+        <span aria-hidden="true">↓</span>
+      </a>
+    </section>
+
+    <section class="projects" id="projects">
+      <div class="section-heading">
+        <h2 data-fr="Choisis ton aventure"
+            data-en="Choose your adventure">Choisis ton aventure</h2>
+        <p data-fr="Deux projets, deux univers à explorer."
+           data-en="Two projects, two worlds to explore.">
+          Deux projets, deux univers à explorer.
+        </p>
+      </div>
+
+      <div class="cards">
+
+        <!-- THE NEW LEVELS -->
+        <article class="mod-card tnl">
+          <div class="art art-tnl" aria-hidden="true">
+            <div class="art-icon">🍄</div>
+          </div>
+
+          <div class="card-content">
+            <span class="tag">NSMBWII MOD</span>
+            <h3>The New Levels</h3>
+
+            <p data-fr="De nouveaux niveaux, des mondes colorés, des défis inédits et des surprises à découvrir dans cette aventure Mario."
+               data-en="New levels, colourful worlds, fresh challenges and surprises await in this Mario adventure.">
+              De nouveaux niveaux, des mondes colorés, des défis
+              inédits et des surprises à découvrir dans cette aventure Mario.
+            </p>
+
+            <a class="card-link" href="/The-New-Levels/">
+              <span data-fr="Découvrir le mod"
+                    data-en="Explore the mod">Découvrir le mod</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- MARIO AND THE MYSTERIOUS PORTAL -->
+        <article class="mod-card matmp">
+          <div class="art art-matmp" aria-hidden="true">
+            <div class="art-icon">✨</div>
+          </div>
+
+          <div class="card-content">
+            <span class="tag">NSMBWII MOD</span>
+            <h3>Mario and the Mysterious Portal</h3>
+
+            <p data-fr="Un portail mystérieux, des secrets à découvrir et une nouvelle aventure Mario. Oseras-tu franchir le portail ?"
+               data-en="A mysterious portal, secrets to uncover and a new Mario adventure. Will you dare to enter?">
+              Un portail mystérieux, des secrets à découvrir et une
+              nouvelle aventure Mario. Oseras-tu franchir le portail ?
+            </p>
+
+            <a class="card-link" href="/Mario-and-the-Mysterious-Portal/">
+              <span data-fr="Entrer dans l'aventure"
+                    data-en="Enter the adventure">Entrer dans l'aventure</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <h2 data-fr="Bienvenue chez Adidi2071"
+          data-en="Welcome to Adidi2071">Bienvenue chez Adidi2071</h2>
+
+      <p data-fr="Je développe des projets de mods autour de New Super Mario Bros. Wii. Chaque projet a ses propres idées, son univers et ses surprises. Ce site rassemble mes aventures au même endroit."
+         data-en="I create mods for New Super Mario Bros. Wii. Each project has its own ideas, universe and surprises. This website brings all my adventures together in one place.">
+        Je développe des projets de mods autour de New Super Mario Bros. Wii.
+        Chaque projet a ses propres idées, son univers et ses surprises.
+        Ce site rassemble mes aventures au même endroit.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Adidi2071 Mods</strong> · 2026</p>
+    <p class="footer-small"
+       data-fr="Projets de fans non officiels. Non affilié à Nintendo."
+       data-en="Unofficial fan projects. Not affiliated with Nintendo.">
+      Projets de fans non officiels. Non affilié à Nintendo.
+    </p>
+  </footer>
+
+  <script>
+    const langToggle = document.getElementById('langToggle');
+    let currentLang = 'fr';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('[data-fr][data-en]').forEach(element => {
+        element.textContent = element.dataset[lang];
+      });
+
+      langToggle.textContent = lang === 'fr' ? 'EN 🌐' : 'FR 🌐';
+      langToggle.setAttribute(
+        'aria-label',
+        lang === 'fr' ? 'Switch to English' : 'Passer en français'
+      );
+    }
+
+    langToggle.addEventListener('click', () => {
+      setLanguage(currentLang === 'fr' ? 'en' : 'fr');
+    });
+  </script>
+</body>
+</html>
