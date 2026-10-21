@@ -1,0 +1,661 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10132f">
+  <meta name="description" content="Mario and the Mysterious Portal, a fan-made New Super Mario Bros. Wii adventure by Adidi2071. Discover the mysterious portal and the secrets beyond it.">
+  <title>Mario and the Mysterious Portal | Adidi2071</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+    :root {
+      --bg: #10132f;
+      --panel: rgba(255,255,255,.065);
+      --text: #f7f6ff;
+      --muted: #c0c5e3;
+      --cyan: #72e6ff;
+      --purple: #ad91ff;
+      --gold: #ffd477;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 50% 25%, #27245d 0, transparent 45%),
+        radial-gradient(ellipse at 90% 70%, #202f62 0, transparent 40%),
+        var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .navbar {
+      width: min(1120px, 92%);
+      margin: auto;
+      padding: 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+
+    .brand span {
+      color: var(--cyan);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-weight: 800;
+      transition: color .2s;
+    }
+
+    .nav-link:hover {
+      color: white;
+    }
+
+    .lang-button {
+      border: 1px solid #ffffff30;
+      border-radius: 12px;
+      padding: 9px 13px;
+      background: var(--panel);
+      color: white;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .hero {
+      min-height: 670px;
+      width: min(1100px, 92%);
+      margin: auto;
+      padding: 75px 0 85px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      color: #d9faff;
+      opacity: .8;
+      animation: twinkle 3s ease-in-out infinite alternate;
+    }
+
+    .star:nth-child(1) { top: 13%; left: 13%; font-size: 20px; }
+    .star:nth-child(2) { top: 22%; right: 17%; font-size: 15px; animation-delay: .8s; }
+    .star:nth-child(3) { top: 52%; left: 8%; font-size: 13px; animation-delay: 1.2s; }
+    .star:nth-child(4) { top: 61%; right: 10%; font-size: 23px; animation-delay: .4s; }
+    .star:nth-child(5) { top: 82%; left: 25%; font-size: 14px; animation-delay: 1.5s; }
+    .star:nth-child(6) { top: 78%; right: 27%; font-size: 12px; animation-delay: .9s; }
+    .star:nth-child(7) { top: 8%; left: 48%; font-size: 13px; animation-delay: .6s; }
+    .star:nth-child(8) { top: 39%; right: 6%; font-size: 12px; animation-delay: 1.4s; }
+
+    @keyframes twinkle {
+      from { opacity: .25; transform: scale(.8); }
+      to { opacity: 1; transform: scale(1.2); }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 15px;
+      border: 1px solid #a6eaff35;
+      border-radius: 50px;
+      background: #72e6ff0b;
+      color: #d8f7ff;
+      font-size: .82rem;
+      font-weight: 900;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 7.2vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      text-wrap: balance;
+      max-width: 1000px;
+      text-shadow: 0 0 35px #9b7cff22;
+    }
+
+    .title-first {
+      display: block;
+      color: #fff;
+    }
+
+    .title-second {
+      display: block;
+      background: linear-gradient(100deg, #83f0ff, #b9a2ff 50%, #ffdc91);
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .portal-scene {
+      width: 190px;
+      height: 190px;
+      margin: 32px auto 15px;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .portal-ring {
+      position: absolute;
+      width: 120px;
+      height: 155px;
+      border: 6px solid #8bf0ff;
+      border-radius: 50%;
+      transform: rotate(12deg);
+      box-shadow:
+        0 0 12px #63e9ff,
+        0 0 30px #4d9bff,
+        0 0 65px #8d65ff88,
+        inset 0 0 22px #66dfff99;
+      animation: portalPulse 4s ease-in-out infinite alternate;
+    }
+
+    .portal-ring::before {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border: 2px solid #d2fbff;
+      border-radius: 50%;
+      opacity: .75;
+    }
+
+    .portal-core {
+      position: absolute;
+      width: 85px;
+      height: 125px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, #c9ffff 0, #6e9dff 30%, #9d54ff 65%, transparent 100%);
+      filter: blur(8px);
+    }
+
+    .portal-symbol {
+      position: relative;
+      font-size: 2rem;
+      filter: drop-shadow(0 0 12px #fff);
+    }
+
+    @keyframes portalPulse {
+      from { transform: rotate(12deg) scale(.96); }
+      to { transform: rotate(-8deg) scale(1.04); }
+    }
+
+    .hero-description {
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 1.08rem;
+      margin: 12px auto 28px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 13px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 14px 23px;
+      border-radius: 14px;
+      font-weight: 900;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      color: #11132e;
+      background: linear-gradient(100deg, #83f0ff, #b5a1ff);
+      box-shadow: 0 8px 30px #77bfff26;
+    }
+
+    .button-secondary {
+      border: 1px solid #ffffff30;
+      background: #ffffff09;
+      color: white;
+    }
+
+    .section {
+      width: min(1000px, 92%);
+      margin: 0 auto;
+      padding: 60px 0;
+      scroll-margin-top: 25px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 900;
+    }
+
+    .section-heading p {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .glass-card {
+      border: 1px solid #ffffff1b;
+      border-radius: 23px;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      padding: 30px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .feature {
+      border: 1px solid #ffffff16;
+      border-radius: 19px;
+      background: #ffffff06;
+      padding: 24px 20px;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .feature:hover {
+      transform: translateY(-4px);
+      border-color: #83f0ff55;
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .feature h3 {
+      font-size: 1.12rem;
+      margin-bottom: 9px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: .95rem;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 13px;
+      border: 1px solid #ffd47740;
+      background: #ffd4770c;
+      color: var(--gold);
+      border-radius: 12px;
+      font-size: .9rem;
+      font-weight: 900;
+      margin-top: 20px;
+    }
+
+    .credits {
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .credits strong {
+      color: white;
+    }
+
+    footer {
+      border-top: 1px solid #ffffff15;
+      text-align: center;
+      padding: 30px 5%;
+      color: #aab3d1;
+      font-size: .9rem;
+      line-height: 1.8;
+      margin-top: 45px;
+    }
+
+    footer strong {
+      color: white;
+    }
+
+    .back-home {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--cyan);
+      font-weight: 800;
+    }
+
+    @media (max-width: 760px) {
+      .navbar {
+        flex-wrap: wrap;
+      }
+
+      .nav-right {
+        gap: 12px;
+      }
+
+      .nav-link {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 70px 0;
+      }
+
+      h1 {
+        letter-spacing: -1px;
+      }
+
+      .portal-scene {
+        transform: scale(.88);
+        margin: 18px auto 5px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .glass-card {
+        padding: 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <a class="brand" href="/" aria-label="Adidi2071 Mods">
+      ADIDI2071 <span>MODS.</span>
+    </a>
+
+    <nav class="nav-right" aria-label="Navigation">
+      <a class="nav-link" href="#about"
+         data-fr="Le projet" data-en="The project">Le projet</a>
+      <a class="nav-link" href="#features"
+         data-fr="Univers" data-en="Universe">Univers</a>
+      <a class="nav-link" href="#credits"
+         data-fr="Crédits" data-en="Credits">Crédits</a>
+      <button class="lang-button" id="langToggle" type="button"
+              aria-label="Switch to English">EN 🌐</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="stars" aria-hidden="true">
+        <span class="star">✦</span>
+        <span class="star">✧</span>
+        <span class="star">✦</span>
+        <span class="star">✧</span>
+        <span class="star">✦</span>
+        <span class="star">✧</span>
+        <span class="star">✦</span>
+        <span class="star">✧</span>
+      </div>
+
+      <div class="eyebrow">
+        <span>✦</span>
+        <span data-fr="Une aventure mystérieuse commence"
+              data-en="A mysterious adventure begins">
+          Une aventure mystérieuse commence
+        </span>
+      </div>
+
+      <h1>
+        <span class="title-first">Mario and</span>
+        <span class="title-second">the Mysterious Portal</span>
+      </h1>
+
+      <div class="portal-scene" aria-hidden="true">
+        <div class="portal-core"></div>
+        <div class="portal-ring"></div>
+        <div class="portal-symbol">✦</div>
+      </div>
+
+      <p class="hero-description"
+         data-fr="Un portail énigmatique. Un monde rempli de secrets. Une nouvelle aventure dans l'univers de New Super Mario Bros. Wii. Franchis le portail et découvre ce qui se cache de l'autre côté."
+         data-en="A mysterious portal. A world full of secrets. A new adventure in the world of New Super Mario Bros. Wii. Step through the portal and discover what lies beyond.">
+        Un portail énigmatique. Un monde rempli de secrets.
+        Une nouvelle aventure dans l'univers de New Super Mario Bros. Wii.
+        Franchis le portail et découvre ce qui se cache de l'autre côté.
+      </p>
+
+      <div class="buttons">
+        <a class="button button-primary" href="#about">
+          <span data-fr="Découvrir le projet"
+                data-en="Discover the project">Découvrir le projet</span>
+          <span aria-hidden="true">✦</span>
+        </a>
+
+        <a class="button button-secondary" href="#features">
+          <span data-fr="Explorer l'univers"
+                data-en="Explore the universe">Explorer l'univers</span>
+          <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-heading">
+        <h2 data-fr="Bienvenue de l'autre côté"
+            data-en="Welcome to the other side">
+          Bienvenue de l'autre côté
+        </h2>
+        <p data-fr="Un projet de fan créé autour de New Super Mario Bros. Wii."
+           data-en="A fan-made project built around New Super Mario Bros. Wii.">
+          Un projet de fan créé autour de New Super Mario Bros. Wii.
+        </p>
+      </div>
+
+      <div class="glass-card">
+        <p data-fr="Mario and the Mysterious Portal est un mod fan-made de New Super Mario Bros. Wii développé par Adidi2071. Son idée centrale tourne autour d'un portail mystérieux et de nouvelles possibilités de gameplay. Le projet est en développement : cette page sera enrichie au fil de sa création."
+           data-en="Mario and the Mysterious Portal is a fan-made New Super Mario Bros. Wii mod developed by Adidi2071. Its central idea revolves around a mysterious portal and new gameplay possibilities. The project is in development, and this page will grow as development continues.">
+          Mario and the Mysterious Portal est un mod fan-made de
+          New Super Mario Bros. Wii développé par Adidi2071.
+          Son idée centrale tourne autour d'un portail mystérieux
+          et de nouvelles possibilités de gameplay. Le projet est
+          en développement : cette page sera enrichie au fil de sa création.
+        </p>
+
+        <div class="status">
+          <span>✦</span>
+          <span data-fr="En développement"
+                data-en="In development">En développement</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="section-heading">
+        <h2 data-fr="Un univers à découvrir"
+            data-en="A universe to discover">Un univers à découvrir</h2>
+        <p data-fr="Le mystère ne fait que commencer."
+           data-en="The mystery is only beginning.">
+          Le mystère ne fait que commencer.
+        </p>
+      </div>
+
+      <div class="features">
+        <article class="feature">
+          <div class="feature-icon">🌀</div>
+          <h3 data-fr="Le portail"
+              data-en="The portal">Le portail</h3>
+          <p data-fr="Une mécanique centrale qui ouvre de nouvelles possibilités d'exploration."
+             data-en="A central mechanic that opens up new possibilities for exploration.">
+            Une mécanique centrale qui ouvre de nouvelles possibilités d'exploration.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">🌌</div>
+          <h3 data-fr="Un monde mystérieux"
+              data-en="A mysterious world">Un monde mystérieux</h3>
+          <p data-fr="Une atmosphère magique, des couleurs cosmiques et des secrets à découvrir."
+             data-en="A magical atmosphere, cosmic colours and secrets waiting to be discovered.">
+            Une atmosphère magique, des couleurs cosmiques et des secrets à découvrir.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">⭐</div>
+          <h3 data-fr="De nouvelles idées"
+              data-en="New ideas">De nouvelles idées</h3>
+          <p data-fr="Des concepts de gameplay originaux pour revisiter l'expérience NSMBWii."
+             data-en="Original gameplay concepts to give the NSMBWii experience a new twist.">
+            Des concepts de gameplay originaux pour revisiter l'expérience NSMBWii.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="download">
+      <div class="section-heading">
+        <h2 data-fr="Le portail n'est pas encore ouvert..."
+            data-en="The portal isn't open yet...">
+          Le portail n'est pas encore ouvert...
+        </h2>
+        <p data-fr="Le mod est en développement. Le téléchargement sera annoncé ici lorsqu'il sera disponible."
+           data-en="The mod is in development. Download information will appear here when it becomes available.">
+          Le mod est en développement. Le téléchargement sera annoncé
+          ici lorsqu'il sera disponible.
+        </p>
+      </div>
+
+      <div class="glass-card" style="text-align:center">
+        <div style="font-size:3rem;margin-bottom:12px" aria-hidden="true">🔒</div>
+        <h3 data-fr="Téléchargement bientôt disponible"
+            data-en="Download coming soon">
+          Téléchargement bientôt disponible
+        </h3>
+        <p style="color:var(--muted);line-height:1.8;margin-top:10px"
+           data-fr="Reviens plus tard pour découvrir les prochaines étapes du projet."
+           data-en="Come back later to discover the next steps of the project.">
+          Reviens plus tard pour découvrir les prochaines étapes du projet.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="credits">
+      <div class="section-heading">
+        <h2 data-fr="Crédits"
+            data-en="Credits">Crédits</h2>
+      </div>
+
+      <div class="glass-card credits">
+        <p><strong>Mario and the Mysterious Portal</strong></p>
+        <p data-fr="Création et développement du mod : Adidi2071"
+           data-en="Mod concept and development: Adidi2071">
+          Création et développement du mod : Adidi2071
+        </p>
+        <p data-fr="Projet de fan non officiel, sans affiliation avec Nintendo."
+           data-en="Unofficial fan project, not affiliated with Nintendo.">
+          Projet de fan non officiel, sans affiliation avec Nintendo.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Mario and the Mysterious Portal</strong></p>
+    <p>© 2026 Adidi2071 · <span data-fr="Projet de fan"
+      data-en="Fan project">Projet de fan</span></p>
+    <a class="back-home" href="/"
+       data-fr="← Retour à Adidi2071 Mods"
+       data-en="← Back to Adidi2071 Mods">
+      ← Retour à Adidi2071 Mods
+    </a>
+  </footer>
+
+  <script>
+    const langToggle = document.getElementById('langToggle');
+    let currentLang = 'fr';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('[data-fr][data-en]').forEach(element => {
+        element.textContent = element.dataset[lang];
+      });
+
+      langToggle.textContent = lang === 'fr' ? 'EN 🌐' : 'FR 🌐';
+      langToggle.setAttribute(
+        'aria-label',
+        lang === 'fr' ? 'Switch to English' : 'Passer en français'
+      );
+    }
+
+    langToggle.addEventListener('click', () => {
+      setLanguage(currentLang === 'fr' ? 'en' : 'fr');
+    });
+  </script>
+</body>
+</html>
